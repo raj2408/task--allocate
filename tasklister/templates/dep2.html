@@ -1,0 +1,46 @@
+{% load static %}   {% include "header.html" %}
+    {% include "base.html" %}
+   <script>
+        $(function() {
+            $('.bar').change(function() {
+                console.log('Here')
+                console.log($(this).data('task-id'));
+                $.ajax({
+                    url: 'foo',
+                    data: {val: $(this).val(), val2: $(this).data('task-id')},
+                    success: function(res) {
+                        console.log(res)
+                    }
+                });
+            })
+
+        })
+    </script>
+
+
+<div class = "container" align="center">
+    <h2>Department 2 Details</h2>
+
+<table class="table table-hover" border="3" align="center">
+
+    <thead bgcolor="#F89500">
+    <tr><td>Department</td><td>Task</td><td>User</td><td>User ID</td><td>Status</td><td>Update Status</td><td>Update</td></tr></thead>
+     {% for object in objects %}
+    <tr><td>{{object.department}}</td><td>{{object.task}}</td><td>{{object.user}}</td><td>{{object.pk}}</td><td class="td_status">{{object.status}}</td><td>
+        <select name="thelist" class="bar" data-task-id="{{object.id}}" value="{{object.status}}">
+            <option id ="0" value="0" {% if object.status == "0" %} selected="selected"   {% endif %}>Pending</option>
+            <option id ="1" value="1" {% if object.status == "1" %} selected="selected"  {% endif %}>On Progress</option>
+            <option id ="2" value = "2" {% if object.status == "2" %} selected="selected"  {% endif %}>Completed</option>
+</select></td>
+        </td>
+<td><button type="button" class="btn btn-light"><a href="/dept1">Save</a> </button> </tr></td>
+
+
+
+</tr>
+      {% endfor %}
+
+   <!--<tr>     <button type="button" class="btn btn-light"><a href="student_edit.html">Edit Table</a> </button> </tr>
+-->
+    </table>
+

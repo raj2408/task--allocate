@@ -1,0 +1,54 @@
+{% load static %}   {% include "header.html" %}
+    {% include "base.html" %}
+
+<div class="container" align="center">
+
+
+ <form action="/adduser/" method ="post"> {% csrf_token %}
+    <label for="name"> Name : </label>
+    <input type="text" name=" name" value="" id="name">
+    <label for="department">Department : </label>
+         <select name="department">
+  <option value="0">Department 1<option>
+  <option value="1">Department 2</option>
+     </select>
+    <input type="submit" value="Add User"/>
+</form>
+</div>
+
+
+
+
+<!--
+
+<div class="container">
+   <table class="table table-hover" border="3" align="center">
+       {% csrf_token %}
+
+    <thead bgcolor="#F89500"><tr><td align="center">Name</td><td align="center">Department--</td></tr></thead>
+     {% for field in form %}
+    <tr><td>{{field.name}}</td><td>{{field.department}}</td>
+</tr>
+      {% endfor %}
+
+    </table>
+    </div>
+-->
+
+
+<div class="container" class="jumbotron" class="table-hover" class="table-condensed">
+
+    <form method="POST" class="post-form">
+        <table bgcolor="#e6d6dd" class="table table-striped" border=".5px" >
+            {% csrf_token %}
+            <thead align="center"><h4>Add User</h4></thead>
+            {% for field in form %}
+       <tr><td align="center"> {{ field.label }}:{% if field.is_mandatory %} * {% endif %} </td>
+           <td align="center">{{ field }} {{ field.errors }}</td>
+       </tr>                                     {% endfor %}
+            <tr><td></td></td><td align="center">
+                <button type="button" class="btn btn-info">Save</button>
+               </td></tr>
+        </table>
+        </form>
+</div>
